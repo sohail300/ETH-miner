@@ -47,27 +47,6 @@ const bonusTasks = [
 export default function BonusTasksPage() {
   const [taskProgress, setTaskProgress] = useState({});
 
-  const handleStartTask = (taskId) => {
-    setTaskProgress((prev) => ({
-      ...prev,
-      [taskId]: {
-        startTime: Date.now(),
-        progress: prev[taskId]?.progress || 0,
-      },
-    }));
-  };
-
-  const handleCompleteTask = (taskId) => {
-    setTaskProgress((prev) => ({
-      ...prev,
-      [taskId]: {
-        ...prev[taskId],
-        progress: bonusTasks.find((task) => task.id === taskId).maxProgress,
-      },
-    }));
-    // Here you would typically call a function to award the user their reward
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-gray-200 p-8">
       <div className="max-w-4xl mx-auto">
@@ -104,36 +83,32 @@ export default function BonusTasksPage() {
                     <span>{task.timeRequired} min</span>
                   </div>
                   <Progress
-                    value={
-                      ((taskProgress[task.id]?.progress || 0) /
-                        task.maxProgress) *
-                      100
-                    }
+                    value={(0 / task.maxProgress) * 100}
                     className="h-2 mb-2"
                   />
                   <div className="flex justify-between items-center">
-                    {taskProgress[task.id]?.progress === task.maxProgress ? (
+                    {/* (
                       <div className="flex items-center text-green-400">
                         <CheckCircle className="w-5 h-5 mr-2" />
                         <span>Completed</span>
                       </div>
-                    ) : (
-                      <Button
-                        onClick={() => handleStartTask(task.id)}
-                        className="bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black"
-                      >
-                        Start Task
-                      </Button>
-                    )}
-                    {taskProgress[task.id] &&
-                      taskProgress[task.id].progress < task.maxProgress && (
-                        <Button
-                          onClick={() => handleCompleteTask(task.id)}
-                          className="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-500 hover:to-green-700 text-black ml-2"
-                        >
-                          Complete
-                        </Button>
-                      )}
+                    )  */}
+
+                    <Button
+                      // onClick={() => handleStartTask(task.id)}
+                      className="bg-gradient-to-r from-yellow-600 to-yellow-800 hover:from-yellow-500 hover:to-yellow-700 text-black"
+                    >
+                      Start Task
+                    </Button>
+                    {/* {taskProgress[task.id] && */}
+                    {/* taskProgress[task.id].progress < task.maxProgress && ( */}
+                    <Button
+                      // onClick={() => handleCompleteTask(task.id)}
+                      className="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-500 hover:to-green-700 text-black ml-2"
+                    >
+                      Complete
+                    </Button>
+                    {/* )} */}
                   </div>
                 </CardContent>
               </Card>
